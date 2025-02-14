@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "58097894478",
+    "project_id": "sydd-18930",
+    "storage_bucket": "sydd-18930.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58097894478:android:3a814a271cffc5ace52f1f",
+        "android_client_info": {
+          "package_name": "com.example.syd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNCk4quU0dwswddhiJKsC42PcglSWIqKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
