@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:syd/auth/auth_gate.dart';
 import 'package:syd/auth/auth_service.dart';
+import 'package:syd/pages/profile_setup.dart';
 import 'firebase_options.dart';
 
 void main() async {

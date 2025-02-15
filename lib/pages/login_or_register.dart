@@ -48,17 +48,18 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                     GestureDetector(
                       onTap: () {
                         Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage(onTap: () {})),
-                                (route) => false,);
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginPage(onTap: () {})),
+                          (route) => false,
+                        );
                       },
                       child: Container(
                         padding:
                             const EdgeInsets.fromLTRB(32.0, 17.0, 32.0, 17.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(9),
+                            borderRadius: BorderRadius.circular(20),
                             color: const Color.fromARGB(255, 2, 140, 254),
                             border: Border.all(color: Colors.white, width: 1)),
                         child: Text(
@@ -71,18 +72,18 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                     GestureDetector(
                       onTap: () {
                         Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    RegisterPage(onTap: () {})),
-                                    (route) => false,);
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterPage(onTap: () {})),
+                          (route) => false,
+                        );
                       },
                       child: Container(
                         padding:
                             const EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 15.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(13),
+                            borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
                             border: Border.all(
                                 color: const Color.fromARGB(255, 2, 140, 254),

@@ -14,41 +14,71 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   final emailController = TextEditingController();
   @override
-  void dispose(){
+  void dispose() {
     emailController.dispose();
     super.dispose();
   }
 
-  Future passwordReset() async{
-    try{
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text.trim());
-      showDialog(context: context, builder: (context){
-        return AlertDialog(
-          title: Text('Error'),
-          content: Text('Password reset link sent! check your email'),
-          actions: [
-            TextButton(onPressed: (){
-              Navigator.pop(context);
-            }, child: Text('OK'))
-          ],
-        );
-      });
-    }on FirebaseAuthException catch(e){
+  Future passwordReset() async {
+    try {
+      String email = emailController.text.trim();
+      //check if the email exists
+      List<String> signInMethods =
+          await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+      if (signInMethods.isEmpty) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Error'),
+                content: Text('No user found for that email'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('OK'))
+                ],
+              );
+            });
+      }
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.text.trim());
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Success'),
+              content: Text('Password reset link sent! check your email'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('OK'))
+              ],
+            );
+          });
+    } on FirebaseAuthException catch (e) {
       print(e);
-      showDialog(context: context, builder: (context){
-        return AlertDialog(
-          title: Text('Error'),
-          content: Text(e.message.toString()),
-          actions: [
-            TextButton(onPressed: (){
-              Navigator.pop(context);
-            }, child: Text('OK'))
-          ],
-        );
-      });
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text(e.code),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('OK'))
+              ],
+            );
+          });
     }
-    
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +87,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: SafeArea(
           child: Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -102,19 +132,20 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "Don't worry it happens sometimes 😊, Enter your email and we'll send you a password reset link",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black54,
-                    )
-                  ),
+                      "Don't worry it happens sometimes 😊, Enter your email and we'll send you a password reset link",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black54,
+                      )),
                   const SizedBox(height: 25),
-                  MyTextField(controller: emailController, hintText: 'Email', obscureText: false),
+                  MyTextField(
+                      controller: emailController,
+                      hintText: 'Email',
+                      obscureText: false),
                   const SizedBox(height: 25),
                   MyButton(onTap: passwordReset, text: 'Send'),
                 ],
